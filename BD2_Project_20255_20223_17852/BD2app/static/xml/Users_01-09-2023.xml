@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Users>
+  <User>
+    <_id>549cf786-6ca6-4720-b201-7dfa90f8c435</_id>
+    <name>ION</name>
+    <username>ION</username>
+    <role>1</role>
+  </User>
+  <User>
+    <_id>731d8755-143f-4830-bc66-b7f9e0dd31d3</_id>
+    <name>Admin</name>
+    <username>admin</username>
+    <role>1</role>
+  </User>
+  <User>
+    <_id>95d9fefc-6c82-405c-b2ef-e60dd1ceb4d5</_id>
+    <name>Comercial Tipo 1</name>
+    <username>ComType1</username>
+    <role>2</role>
+  </User>
+  <User>
+    <_id>cc0a0788-ae4b-4e2a-af7a-84cde1880c3a</_id>
+    <name>Comercial Tipo 2</name>
+    <username>ComType2</username>
+    <role>3</role>
+  </User>
+  <User>
+    <_id>59470309-2a83-4422-9c78-cb5c168b1e4e</_id>
+    <name>Parceiro</name>
+    <username>parceiro</username>
+    <role>4</role>
+  </User>
+  <User>
+    <_id>0875eacf-1216-42ae-8e45-aa741459c125</_id>
+    <name>Cliente</name>
+    <username>client</username>
+    <role>0</role>
+  </User>
+  <User>
+    <_id>589a1219-c96d-4bfb-be53-9f5f9eb3f1f0</_id>
+    <name>XPTO</name>
+    <username>XPTO</username>
+    <role>4</role>
+  </User>
+</Users>

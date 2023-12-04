@@ -1,0 +1,1 @@
+ConnString= 'mongodb+srv://BD2:BD2@bd2.627aczq.mongodb.net/'

@@ -1,0 +1,246 @@
+-----------CREATE TABLES-----------
+create table "public"."Orders"(
+	"orderID"	int generated always as identity,
+	"orderCustomer"	uuid		not null,
+	"orderDate"	date		not null default current_date,
+	"orderTotal"	numeric(15,2)	not null default 0,
+	"orderQuantity"	int		not null default 0,
+	"orderStatus"	boolean		not null default false,
+	constraint "Order_pk" primary key ("orderID")
+);
+
+INSERT INTO public."Orders"(
+	"orderCustomer", "orderDate", "orderTotal", "orderQuantity", "orderStatus")
+	VALUES ("0875eacf-1216-42ae-8e45-aa741459c125", 2023-08-31, 7280.00, 4, True);
+
+create table "public"."OrderItems"(
+	"orderItemID"	int generated always as identity,
+	"orderID"	int		not null,
+	"orderItemProduct" uuid		not null,
+	"orderItemPrice" numeric(15,2)	not null,
+	constraint "OrderItems_pk" primary key ("orderItemID"),
+	constraint "OrderID_fk" foreign key ("orderID") references "public"."Orders"("orderID")
+);
+
+INSERT INTO public."OrderItems"(
+	"orderID", "orderItemProduct", "orderItemPrice")
+	VALUES (1, "b10b5381-7137-441d-8df0-9cb8defec4aa", 1530.00);
+INSERT INTO public."OrderItems"(
+	"orderID", "orderItemProduct", "orderItemPrice")
+	VALUES (1, "492521c4-c17a-40aa-b9a4-0bbe49420b49", 50.00);
+INSERT INTO public."OrderItems"(
+	"orderID", "orderItemProduct", "orderItemPrice")
+	VALUES (1, "2c2062f1-74f3-485e-8c7b-d106e3eddb00", 3200.00);
+INSERT INTO public."OrderItems"(
+	"orderID", "orderItemProduct", "orderItemPrice")
+	VALUES (1, "48e9380e-22bd-4fc6-9aa8-1eb275a33d7f", 2500.00);
+
+-----------FUNCTIONS-----------
+create or replace function getOrdersByCustomer (customerID uuid)
+	returns setof "public"."Orders"
+	language plpgsql
+	as $$
+	begin
+		return query select * from "public". "Orders"
+		where "orderCustomer" = customerID
+		order by "orderID" desc;
+	end; 
+	$$;
+
+create or replace function getOrder(orderID int)
+	returns table("orderID" int, "orderCustomer" uuid, "orderDate" date, "orderTotal" numeric, "orderStatus" boolean, "orderProductID" uuid, "orderItemPrice" numeric(15,2))
+	language plpgsql 
+	as $$
+	begin
+		return query select "Orders"."orderID", "Orders"."orderCustomer", "Orders"."orderDate", "Orders"."orderTotal", "Orders"."orderStatus", "OrderItems". "orderItemProduct", "OrderItems"."orderItemPrice" from "public"."Orders"
+		join "OrderItems" on "Orders"."orderID" = "OrderItems"."orderID"
+		where "public"."Orders"."orderID" = orderID;
+	end;
+	$$;
+
+create or replace function getTop5MostSoldProductsByUser(customerID uuid) 
+	returns setof uuid
+	language plpgsql
+	as $$
+	begin
+		return query select "orderItemProduct" from "public". "OrderItems"
+		join "Orders" on "OrderItems"."orderID" = "Orders"."orderID"
+		where "Orders". "orderCustomer" = customerID
+		group by "orderItemProduct"
+		order by count(*) desc
+		limit 5;
+	end;
+	$$;
+
+create or replace function getMostSoldProductByType(orderProductID uuid[]) 
+	returns uuid
+	language plpgsql
+	as $$
+	declare mostSoldProduct uuid;
+	begin
+		select "orderItemProduct" into mostSoldProduct from "public". "OrderItems" 
+		where "orderItemProduct" = (select "orderItemProduct" from "public". "OrderItems" 
+			where "orderItemProduct" = any (orderProductID)
+			group by "orderItemProduct"
+			order by count(*) desc
+			limit 1);
+		return mostSoldProduct;
+	end;
+	$$;
+
+create or replace function getMostSoldProductByPartner(orderProductID uuid[])
+	returns table (count bigint, productID uuid)
+	language plpgsql
+	as $$
+	begin
+		return query select count(*), "orderItemProduct" from "public". "OrderItems"
+		where "orderItemProduct" = any (orderProductID)
+		group by "orderItemProduct"
+		order by count(*) desc
+		limit 5;
+	end;
+	$$;
+
+create or replace function getSoldProductByPartner(orderProductID uuid[])
+	returns table (count bigint, productID uuid)
+	language plpgsql
+	as $$
+	begin
+		return query select count(*), "orderItemProduct" from "public". "OrderItems"
+		where "orderItemProduct" = any (orderProductID)
+		group by "orderItemProduct"
+		order by count(*) desc;
+	end;
+	$$;
+
+create or replace function getOrdersByOnePartner(orderProductID uuid[])
+	returns table (productID uuid, orderTotal numeric(15, 2))
+	language plpgsql
+	as $$
+	begin
+		return query select "orderItemProduct", "orderTotal"
+		from "public". "OrderItems"
+		join "Orders" on "OrderItems"."orderID" = "Orders"."orderID"
+		where "orderItemProduct" = any (orderProductID);
+	end; 
+	$$;
+-----------PROCEDURES-----------
+create or replace procedure Orders_insert(orderProductID uuid[], orderCustomer uuid, orderPrice numeric(15,2) []) 
+	language plpgsql
+	as $$
+	declare orderID int;
+	begin
+		insert into "public". "Orders" ("orderCustomer")
+		values (orderCustomer);
+		select "orderID" into orderID from "public"."Orders"
+		order by "orderID" desc limit 1;
+		call OrderItems_insert(orderID, orderProductID, orderPrice);
+	end; 
+	$$;
+
+create or replace procedure OrderItems_insert(orderID int, orderItemProduct uuid[], orderItemPrice numeric(15,2)[]) 
+	language plpgsql
+	as $$
+	begin
+		for i in 1..array_length(orderItemProduct, 1) loop
+			insert into "public"."OrderItems"("orderID", "orderItemProduct", "orderItemPrice")
+			values (orderID, orderItemProduct[i], orderItemPrice[i]);
+		end Loop;
+	end;
+	$$;
+
+create or replace procedure Orders_delete(orderID int)
+	language plpgsql
+	as $$
+	begin
+		delete from "public". "Orders"
+		where "orderID" = orderID;
+	end; 
+	$$;
+
+create or replace procedure Update_OrderStatus(orderID int[])
+	language plpgsql
+	as $$
+	begin
+		for i in 1..array_length(orderID, 1) loop
+			update "public"."Orders"
+			set "orderStatus" = true
+			where "orderID" = orderID[i];
+		end loop;
+	end; 
+	$$;
+
+create or replace procedure UpdateAll_OrderStatus()
+	language plpgsql
+	as $$
+	begin
+		update "public". "Orders"
+		set "orderStatus" = true
+		where "orderStatus" = false;
+	end;
+	$$;
+-----------TRIGGERS-----------
+create or replace function OrdersItem_insertTrigger()
+	returns trigger
+	language plpgsql
+	as $$
+	declare totalProductItem numeric(15,2); totalPrice numeric(15,2);
+	begin
+		select sum("orderItemPrice") into totalPrice from "public". "OrderItems" where "orderID" = new. "orderID";
+		select count(*) into totalProductItem from "public". "OrderItems" where "orderID" = new. "orderID";
+		update "public"."Orders" set "orderTotal" = totalPrice, "orderQuantity" = totalProductItem where "orderID" = new."orderID";
+		return new;
+	end;
+	$$;
+
+create or replace trigger Orders_insert_trigger
+	after insert on "public"."OrderItems"
+	for each row
+	execute procedure OrdersItem_insertTrigger();
+-----------VIEWS-----------
+create or replace view getMostPopularProduct as
+	select "orderItemProduct" from "public"."OrderItems"
+		where "orderItemProduct" = (select "orderItemProduct" from "public". "OrderItems" 
+			group by "orderItemProduct"
+			order by count(*) desc 
+			limit 1);
+
+create or replace view getMostPopularProductThisWeek as
+	select "orderItemProduct" from "public"."OrderItems"
+		where "orderItemProduct" = (select "orderItemProduct" from "public"."OrderItems" join "Orders" on "OrderItems"."orderID" = "Orders"."orderID"
+			where "orderDate" > current_date - 7
+			group by "orderItemProduct"
+			order by count(*) desc
+			limit 1);
+
+create or replace view getTop5MostSoldProducts as
+	select "orderItemProduct" from "public". "OrderItems"
+		group by "orderItemProduct"
+		order by count(*) desc 
+		limit 5;
+
+create or replace view getUsersWithMoreOrdersAndHowMany as
+	select count(*), "orderCustomer", "orderItemProduct" from "public"."Orders"
+		join "OrderItems" on "Orders"."orderID" = "OrderItems"."orderID"
+		group by "orderCustomer", "orderItemProduct"
+		order by count(*) desc
+		limit 5;
+
+create or replace view getUsersOrdersAndHowMany as
+	select count(*), "orderCustomer", "orderItemProduct" from "public"."Orders"
+		join "OrderItems" on "Orders"."orderID" = "OrderItems"."orderID"
+		group by "orderCustomer", "orderItemProduct"
+		order by count(*) desc;
+
+create or replace view OrdersView as
+	select "Orders"."orderID", "orderCustomer", "orderDate", "orderTotal", "orderQuantity", "orderStatus", "orderItemID", "orderItemProduct", "orderItemPrice"
+		from "public"."Orders"
+		join "OrderItems" on "OrderItems"."orderID" = "Orders"."orderID";
+
+create or replace view getOrderStatusFalse as
+	select * from "public". "Orders"
+	where "orderStatus" = false;
+
+create or replace view getCountOrderStatusFalse as
+	select count(*) from "public". "Orders"
+	where "orderStatus" = false;

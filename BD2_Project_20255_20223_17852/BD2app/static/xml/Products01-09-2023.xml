@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Products>
+  <Product>
+    <_id>6c47f393-7731-4119-81b4-6bfe1891be5e</_id>
+    <productName>Stock</productName>
+    <productType></productType>
+    <productQuantity>1</productQuantity>
+    <productImage>White_Background.jpg</productImage>
+    <productPriceStart>1</productPriceStart>
+    <productPriceEnd>1</productPriceEnd>
+    <productDescription>Stock</productDescription>
+    <productStatus>1</productStatus>
+    <vendor>67a40c19-2426-4d2c-9552-b1767833547a</vendor>
+    <roleVendor>Stock</roleVendor>
+  </Product>
+  <Product>
+    <_id>e550a04c-405f-40c0-8707-b5785cd64d1e</_id>
+    <productName>Samsung</productName>
+    <productType>07a92e95-250c-4a38-815c-223127c547e1</productType>
+    <productQuantity>1000</productQuantity>
+    <productImage>samsung_galaxy.webp</productImage>
+    <productPriceStart>500</productPriceStart>
+    <productPriceEnd>450.0</productPriceEnd>
+    <productDescription>256gb/1tb snapdragon 8 gen 1 núcleo octa 8.02 2 camera 2k + tela dobrável câmera de leica 50mp</productDescription>
+    <productStatus>1</productStatus>
+    <vendor>59470309-2a83-4422-9c78-cb5c168b1e4e</vendor>
+    <roleVendor>parceiro</roleVendor>
+  </Product>
+  <Product>
+    <_id>9a468685-8b44-40fb-864e-cbf3d103160c</_id>
+    <productName>Asus ZenBook 14</productName>
+    <productType>753902b3-4d3d-412f-9d19-4e3c54181078</productType>
+    <productQuantity>1000</productQuantity>
+    <productImage>Asus ZenBook UX425EA 14.jpg</productImage>
+    <productPriceStart>1300</productPriceStart>
+    <productPriceEnd>1300</productPriceEnd>
+    <productDescription>ASUS ZenBook 14 UM425UAZ-KI016W</productDescription>
+    <productStatus>1</productStatus>
+    <vendor>59470309-2a83-4422-9c78-cb5c168b1e4e</vendor>
+    <roleVendor>parceiro</roleVendor>
+  </Product>
+  <Product>
+    <_id>b10b5381-7137-441d-8df0-9cb8defec4aa</_id>
+    <productName>Xiaomi Mi Mix Fold 2</productName>
+    <productType>07a92e95-250c-4a38-815c-223127c547e1</productType>
+    <productQuantity>998</productQuantity>
+    <productImage>transferir.jpg</productImage>
+    <productPriceStart>1700</productPriceStart>
+    <productPriceEnd>1530.0</productPriceEnd>
+    <productDescription>256gb/1tb snapdragon 8 gen 1 núcleo octa 8.02 2 camera 2k + tela dobrável câmera de leica 50mp</productDescription>
+    <productStatus>1</productStatus>
+    <vendor>59470309-2a83-4422-9c78-cb5c168b1e4e</vendor>
+    <roleVendor>parceiro</roleVendor>
+  </Product>
+  <Product>
+    <_id>14b9b261-375f-4b44-96ab-7aa31178276c</_id>
+    <productName>It takes 2</productName>
+    <productType>5e57b8a9-2b5a-4e15-b877-92b7eb4dd1e7</productType>
+    <productQuantity>1000</productQuantity>
+    <productImage>it takes 2.jpg</productImage>
+    <productPriceStart>25</productPriceStart>
+    <productPriceEnd>25</productPriceEnd>
+    <productDescription>Entra na aventura mais louca da tua vida em It Takes Two, um novo género de aventura de plataforma, criado exclusivamente para Coop. Convida um amigo para jogar gratuitamente com o Passe de Amigo** e trabalha em conjunto em toda a variedade de desafios de jogo alegres e inquietantes.</productDescription>
+    <productStatus>1</productStatus>
+    <vendor>59470309-2a83-4422-9c78-cb5c168b1e4e</vendor>
+    <roleVendor>parceiro</roleVendor>
+  </Product>
+  <Product>
+    <_id>48e9380e-22bd-4fc6-9aa8-1eb275a33d7f</_id>
+    <productName>MacPro</productName>
+    <productType>753902b3-4d3d-412f-9d19-4e3c54181078</productType>
+    <productQuantity>999</productQuantity>
+    <productImage>mac_studio.jpeg</productImage>
+    <productPriceStart>2500</productPriceStart>
+    <productPriceEnd>2500</productPriceEnd>
+    <productDescription>Entregue com carregador de macbook. - 100% verificado e verificado pela nossa equipa de trabalhadores qualificados. Chegará a sua casa em perfeito estado de funcionamento - Garantia profissional de 12 meses 14 dias para mudar de ideias</productDescription>
+    <productStatus>1</productStatus>
+    <vendor>59470309-2a83-4422-9c78-cb5c168b1e4e</vendor>
+    <roleVendor>parceiro</roleVendor>
+  </Product>
+  <Product>
+    <_id>ff349b53-02f4-4630-9055-a6e85722bed2</_id>
+    <productName>GTA V</productName>
+    <productType>5e57b8a9-2b5a-4e15-b877-92b7eb4dd1e7</productType>
+    <productQuantity>999</productQuantity>
+    <productImage>gtacinco.png</productImage>
+    <productPriceStart>50</productPriceStart>
+    <productPriceEnd>50</productPriceEnd>
+    <productDescription>O jogo é simplesmente excepcional, não tenho palavras, apenas diga compre e aproveite ",   "productStatus</productDescription>
+    <productStatus>1</productStatus>
+    <vendor>59470309-2a83-4422-9c78-cb5c168b1e4e</vendor>
+    <roleVendor>parceiro</roleVendor>
+  </Product>
+  <Product>
+    <_id>af26801e-5101-43d8-ac5e-1866c624f2cd</_id>
+    <productName>Ola Game</productName>
+    <productType>5e57b8a9-2b5a-4e15-b877-92b7eb4dd1e7</productType>
+    <productQuantity>1000</productQuantity>
+    <productImage>OLAgame.jpg</productImage>
+    <productPriceStart>5</productPriceStart>
+    <productPriceEnd>5</productPriceEnd>
+    <productDescription>Ola Game, which is popular all over the world, is here! Here you can play with thousands of players, offering classic domino and slot play!</productDescription>
+    <productStatus>1</productStatus>
+    <vendor>589a1219-c96d-4bfb-be53-9f5f9eb3f1f0</vendor>
+    <roleVendor>XPTO</roleVendor>
+  </Product>
+  <Product>
+    <_id>492521c4-c17a-40aa-b9a4-0bbe49420b49</_id>
+    <productName>Fifa 23</productName>
+    <productType>5e57b8a9-2b5a-4e15-b877-92b7eb4dd1e7</productType>
+    <productQuantity>998</productQuantity>
+    <productImage>Fifa23.webp</productImage>
+    <productPriceStart>50</productPriceStart>
+    <productPriceEnd>50</productPriceEnd>
+    <productDescription>O EA SPORTS™ FIFA 23 traz ainda mais ação e realismo do futebol para dentro de campo no Desporto Rei.</productDescription>
+    <productStatus>1</productStatus>
+    <vendor>589a1219-c96d-4bfb-be53-9f5f9eb3f1f0</vendor>
+    <roleVendor>XPTO</roleVendor>
+  </Product>
+  <Product>
+    <_id>2c2062f1-74f3-485e-8c7b-d106e3eddb00</_id>
+    <productName>Mac Studio</productName>
+    <productType>753902b3-4d3d-412f-9d19-4e3c54181078</productType>
+    <productQuantity>999</productQuantity>
+    <productImage>Apple_Mac_Pro_2019.jpeg</productImage>
+    <productPriceStart>3200</productPriceStart>
+    <productPriceEnd>3200</productPriceEnd>
+    <productDescription>M1 Ultra CPU 20‑core GPU 48‑core Neural Engine 32‑core 64 GB de memória unificada 1 TB de armazenamento SSD</productDescription>
+    <productStatus>1</productStatus>
+    <vendor>589a1219-c96d-4bfb-be53-9f5f9eb3f1f0</vendor>
+    <roleVendor>XPTO</roleVendor>
+  </Product>
+  <Product>
+    <_id>0d78d70f-fdf2-439e-a6b1-65f02590806d</_id>
+    <productName>Iphone</productName>
+    <productType>07a92e95-250c-4a38-815c-223127c547e1</productType>
+    <productQuantity>1000</productQuantity>
+    <productImage>iphone.jpg</productImage>
+    <productPriceStart>1000</productPriceStart>
+    <productPriceEnd>900.0</productPriceEnd>
+    <productDescription>Iphone</productDescription>
+    <productStatus>1</productStatus>
+    <vendor>589a1219-c96d-4bfb-be53-9f5f9eb3f1f0</vendor>
+    <roleVendor>XPTO</roleVendor>
+  </Product>
+</Products>
